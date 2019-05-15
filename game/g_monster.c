@@ -31,7 +31,54 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 void monster_fire_bullet (edict_t *self, vec3_t start, vec3_t dir, int damage, int kick, int hspread, int vspread, int flashtype)
 {
 	fire_bullet (self, start, dir, damage, kick, hspread, vspread, MOD_UNKNOWN);
-
+	vec3_t dir2 = { 0, 15, 0 };
+	fire_bullet(self, start, dir2, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir3 = { 0, 30, 0 };
+	fire_bullet(self, start, dir3, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir4 = { 0, 45, 0 };
+	fire_bullet(self, start, dir4, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir5 = { 0, 60, 0 };
+	fire_bullet(self, start, dir5, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir6 = { 0, 75, 0 };
+	fire_bullet(self, start, dir6, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir7 = { 0, 90, 0 };
+	fire_bullet(self, start, dir7, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir8 = { 0, 105, 0 };
+	fire_bullet(self, start, dir8, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir9 = { 0, 120, 0 };
+	fire_bullet(self, start, dir9, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir10 = { 0, 135, 0 };
+	fire_bullet(self, start, dir10, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir11 = { 0, 150, 0 };
+	fire_bullet(self, start, dir11, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir12 = { 0, 165, 0 };
+	fire_bullet(self, start, dir12, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir13 = { 0, 180, 0 };
+	fire_bullet(self, start, dir13, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir14 = { 0, -15, 0 };
+	fire_bullet(self, start, dir14, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir15 = { 0, -30, 0 };
+	fire_bullet(self, start, dir15, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir16 = { 0, -45, 0 };
+	fire_bullet(self, start, dir16, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir17 = { 0, -60, 0 };
+	fire_bullet(self, start, dir17, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir18 = { 0, -75, 0 };
+	fire_bullet(self, start, dir18, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir19 = { 0, -90, 0 };
+	fire_bullet(self, start, dir19, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir20 = { 0, -105, 0 };
+	fire_bullet(self, start, dir20, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir21 = { 0, -120, 0 };
+	fire_bullet(self, start, dir21, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir22 = { 0, -135, 0 };
+	fire_bullet(self, start, dir22, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir23 = { 0, -150, 0 };
+	fire_bullet(self, start, dir23, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir24 = { 0, -165, 0 };
+	fire_bullet(self, start, dir24, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	vec3_t dir25 = { 0, -180, 0 };
+	fire_bullet(self, start, dir25, damage, kick, hspread, vspread, MOD_UNKNOWN);
 	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
 	gi.WriteByte (flashtype);
@@ -40,8 +87,9 @@ void monster_fire_bullet (edict_t *self, vec3_t start, vec3_t dir, int damage, i
 
 void monster_fire_shotgun (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick, int hspread, int vspread, int count, int flashtype)
 {
-	fire_shotgun (self, start, aimdir, damage, kick, hspread, vspread, count, MOD_UNKNOWN);
-
+	fire_shotgun(self, start, aimdir, damage, kick, hspread, vspread, count, MOD_UNKNOWN); 
+	vec3_t dir2 = { 0, -180, 0 }; 
+	fire_shotgun(self, start, dir2, damage, kick, hspread, vspread, count, MOD_UNKNOWN);
 	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
 	gi.WriteByte (flashtype);
@@ -51,7 +99,10 @@ void monster_fire_shotgun (edict_t *self, vec3_t start, vec3_t aimdir, int damag
 void monster_fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, int flashtype, int effect)
 {
 	fire_blaster (self, start, dir, damage, speed, effect, false);
-
+	vec3_t dir2 = { 0, 30, 0 };
+	fire_blaster(self, start, dir2, damage, speed, effect, false);
+	vec3_t dir3 = { 0, -30, 0 };
+	fire_blaster(self, start, dir3, damage, speed, effect, false);
 	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
 	gi.WriteByte (flashtype);
@@ -81,8 +132,6 @@ void monster_fire_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, i
 void monster_fire_railgun (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick, int flashtype)
 {
 	fire_rail (self, start, aimdir, damage, kick);
-
-	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
 	gi.WriteByte (flashtype);
 	gi.multicast (start, MULTICAST_PVS);
@@ -91,7 +140,8 @@ void monster_fire_railgun (edict_t *self, vec3_t start, vec3_t aimdir, int damag
 void monster_fire_bfg (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, int kick, float damage_radius, int flashtype)
 {
 	fire_bfg (self, start, aimdir, damage, speed, damage_radius);
-
+	vec3_t aimdir2 = { 0, 100, 0};
+	fire_bfg(self, start, aimdir2, damage, speed, damage_radius);
 	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
 	gi.WriteByte (flashtype);

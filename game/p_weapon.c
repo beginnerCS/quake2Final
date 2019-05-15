@@ -276,7 +276,7 @@ void NoAmmoWeaponChange (edict_t *ent)
 =================
 Think_Weapon
 
-Called by ClientBeginServerFrame and ClientThink
+Called by ClientBeginServerFrame and ClientThinkf
 =================
 */
 void Think_Weapon (edict_t *ent)
