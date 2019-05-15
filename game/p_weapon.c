@@ -1550,7 +1550,7 @@ void APCA_Fire(edict_t *ent, vec3_t g_offset, int damage)
 
 void Weapon_APCA_fire(edict_t *ent)
 {
-	int		damage = 5;
+	int		damage = 60;
 	vec3_t tempvec;
 	vec3_t tempvec2;
 	vec3_t tempvec3;
@@ -1651,3 +1651,48 @@ void Weapon_BFG (edict_t *ent)
 
 
 //======================================================================
+
+void BC_Fire(edict_t *ent, vec3_t g_offset, int damage)
+{
+	vec3_t	forward, right;
+	vec3_t	start;
+	vec3_t	offset;
+	int HE = 1;
+	int AP = 0;
+	float	damage_radius = 1000;
+	if (is_quad)
+		damage *= 4;
+	AngleVectors(ent->client->v_angle, forward, right, NULL);
+
+	VectorScale(forward, -2, ent->client->kick_origin);
+
+	VectorSet(offset, 8, 8, ent->viewheight - 8);
+	VectorAdd(offset, g_offset, offset);
+	P_ProjectSource(ent->client, ent->s.origin, offset, forward, right, start);
+	fire_bfg2(ent, start, forward, damage, 1000, damage_radius, HE, AP);
+
+	ent->client->ps.gunframe++;
+
+	PlayerNoise(ent, start, PNOISE_WEAPON);
+}
+
+
+void Weapon_BC_fire(edict_t *ent)
+{
+	int		damage = 300;
+	vec3_t tempvec;
+	BC_Fire(ent, vec3_origin, damage);
+	VectorSet(tempvec, 0, -50, 0);
+	VectorAdd(tempvec, vec3_origin, tempvec);
+	BC_Fire(ent, tempvec, damage);
+	ent->client->ps.gunframe++;
+}
+
+
+void BC(edict_t *ent)
+{
+	static int	pause_frames[] = { 39, 45, 50, 55, 0 };
+	static int	fire_frames[] = { 9, 17, 0 };
+
+	Weapon_Generic(ent, 8, 32, 55, 58, pause_frames, fire_frames, Weapon_BC_fire);
+}

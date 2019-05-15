@@ -89,9 +89,10 @@ qboolean CanDamage (edict_t *targ, edict_t *inflictor)
 Killed
 ============
 */
-void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
+void Killed(edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
 {
 	double itemdrop = crandom() * 100;
+	edict_t		*it_ent;
 	gitem_t *it;
 	if (targ->health < -999)
 		targ->health = -999;
@@ -100,7 +101,7 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 
 	if ((targ->svflags & SVF_MONSTER) && (targ->deadflag != DEAD_DEAD))
 	{
-//		targ->svflags |= SVF_DEADMONSTER;	// now treat as a different content type
+		//		targ->svflags |= SVF_DEADMONSTER;	// now treat as a different content type
 		if (!(targ->monsterinfo.aiflags & AI_GOOD_GUY))
 		{
 			level.killed_monsters++;
@@ -114,41 +115,129 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 
 	if (targ->movetype == MOVETYPE_PUSH || targ->movetype == MOVETYPE_STOP || targ->movetype == MOVETYPE_NONE)
 	{	// doors, triggers, etc
-		targ->die (targ, inflictor, attacker, damage, point);
+		targ->die(targ, inflictor, attacker, damage, point);
 		return;
 	}
 
 	if ((targ->svflags & SVF_MONSTER) && (targ->deadflag != DEAD_DEAD))
 	{
 		targ->touch = NULL;
-		monster_death_use (targ);
+		monster_death_use(targ);
 	}
 
-	targ->die (targ, inflictor, attacker, damage, point);	
-	if (itemdrop < 50)
+	targ->die(targ, inflictor, attacker, damage, point);
+	if (itemdrop < -90)
 	{
 		it = FindItem("USS Laffey");
 	}
-	else if (itemdrop < 100)
+	else if (itemdrop < -80)
 	{
-		it = FindItem("USS Laffey");
+		it = FindItem("IJN Ayanami");
 	}
-	/*else if (itemdrop < 0)
+	else if (itemdrop < -70)
 	{
-		it = FindItem("HMS_Javelin");
+		it = FindItem("HMS Hood");
 	}
-	else if (itemdrop < 30)
+	else if (itemdrop < -60)
 	{
-		it = FindItem("USS_Enterprise");
+		it = FindItem("IJN Atago");
 	}
-	else if (itemdrop < 66)
+	else if (itemdrop < -50)
 	{
-		it = FindItem("IJN_Amagi");
+		it = FindItem("HMS Belfast");
 	}
-	else if (itemdrop < 100)
+	else if (itemdrop < -40)
 	{
-		it = FindItem("HMS_Hood");
-	}*/
+		it = FindItem("HMS Hood");
+	}
+	else if (itemdrop < -20)
+	{
+		it = FindItem("Quad Damage");
+		if (attacker->client != NULL)
+		{
+			it_ent = G_Spawn();
+			it_ent->classname = it->classname;
+			SpawnItem(it_ent, it);
+			Touch_Item(it_ent, attacker, NULL, NULL);
+			if (it_ent->inuse)
+				G_FreeEdict(it_ent);
+		}
+		return;
+	}
+	else if (itemdrop < 0)
+	{
+		it = FindItem("Silencer");
+		if (attacker->client != NULL)
+		{
+			it_ent = G_Spawn();
+			it_ent->classname = it->classname;
+			SpawnItem(it_ent, it);
+			Touch_Item(it_ent, attacker, NULL, NULL);
+			if (it_ent->inuse)
+				G_FreeEdict(it_ent);
+		}
+		return;
+	}
+	else if (itemdrop < 20)
+	{
+		it = FindItem("Rebreather");
+		if (attacker->client != NULL)
+		{
+			it_ent = G_Spawn();
+			it_ent->classname = it->classname;
+			SpawnItem(it_ent, it);
+			Touch_Item(it_ent, attacker, NULL, NULL);
+			if (it_ent->inuse)
+				G_FreeEdict(it_ent);
+		}
+		return;
+	}
+	else if (itemdrop < 40)
+	{
+		it = FindItem("Invulnerability");
+		if (attacker->client != NULL)
+		{
+			it_ent = G_Spawn();
+			it_ent->classname = it->classname;
+			SpawnItem(it_ent, it);
+			Touch_Item(it_ent, attacker, NULL, NULL);
+			if (it_ent->inuse)
+				G_FreeEdict(it_ent);
+		}
+		return;
+	}
+	else if (itemdrop < 60)
+	{
+		it = FindItem("Environment Suit");
+		if (attacker->client != NULL)
+		{
+			it_ent = G_Spawn();
+			it_ent->classname = it->classname;
+			SpawnItem(it_ent, it);
+			Touch_Item(it_ent, attacker, NULL, NULL);
+			if (it_ent->inuse)
+				G_FreeEdict(it_ent);
+		}
+		return;
+	}
+	else if (itemdrop < 70)
+	{
+		it = FindItem("Adrenaline");
+		if (attacker->client != NULL)
+		{
+			it_ent = G_Spawn();
+			it_ent->classname = it->classname;
+			SpawnItem(it_ent, it);
+			Touch_Item(it_ent, attacker, NULL, NULL);
+			if (it_ent->inuse)
+				G_FreeEdict(it_ent);
+		}
+		return;
+	}
+	else
+	{
+		return;
+	}
 	if (!it)
 	{
 		gi.cprintf(attacker, PRINT_HIGH, "unknown item.\n");
@@ -156,7 +245,7 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 	}
 	if (!it->drop)
 	{
-		gi.cprintf(attacker, PRINT_HIGH, "Item is not dropable.\n");
+		gi.cprintf(attacker, PRINT_HIGH, "Item is not droppable.\n");
 		return;
 	}
 	it->drop(targ, it);

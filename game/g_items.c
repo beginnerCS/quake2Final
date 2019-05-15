@@ -29,6 +29,7 @@ void HEDestroyer(edict_t *ent);
 void APDestroyer(edict_t *ent);
 void HECL(edict_t *ent);
 void APCA(edict_t *ent);
+void BC(edict_t *ent);
 void Weapon_Shotgun (edict_t *ent);
 void Weapon_SuperShotgun (edict_t *ent);
 void Weapon_Machinegun (edict_t *ent);
@@ -2210,7 +2211,7 @@ tank commander's head
 		"HMS Belfast",
 		Pickup_Weapon,
 		Use_Weapon,
-		Drop_Weapon,
+		Drop_Item,
 		HECL,
 		"misc/w_pkup.wav",
 		"models/weapons/g_shotg/tris.md2", EF_ROTATE,
@@ -2231,7 +2232,7 @@ tank commander's head
 		"IJN Atago",
 		Pickup_Weapon,
 		Use_Weapon,
-		Drop_Weapon,
+		Drop_Item,
 		APCA,
 		"misc/w_pkup.wav",
 		"models/weapons/g_shotg/tris.md2", EF_ROTATE,
@@ -2248,62 +2249,41 @@ tank commander's head
 		/* precache */ "weapons/shotgf1b.wav weapons/shotgr1b.wav"
 	},
 
-	{
-		"USS Enterprise",
-		Pickup_Weapon,
-		Use_Weapon,
-		Drop_Weapon,
-		Weapon_Shotgun,
-		"misc/w_pkup.wav",
-		"models/weapons/g_shotg/tris.md2", EF_ROTATE,
-		"models/weapons/v_shotg/tris.md2",
-		/* icon */		"w_shotgun",
-		/* pickup */	"USS Enterprise",
-		0,
-		1,
-		"Shells",
-		IT_WEAPON | IT_STAY_COOP,
-		WEAP_SHOTGUN,
-		NULL,
-		0,
-		/* precache */ "weapons/shotgf1b.wav weapons/shotgr1b.wav"
-	},
-
-	{
-		"IJN Amagi",
-		Pickup_Weapon,
-		Use_Weapon,
-		Drop_Weapon,
-		Weapon_Shotgun,
-		"misc/w_pkup.wav",
-		"models/weapons/g_shotg/tris.md2", EF_ROTATE,
-		"models/weapons/v_shotg/tris.md2",
-		/* icon */		"w_shotgun",
-		/* pickup */	"IJN Amagi",
-		0,
-		1,
-		"Shells",
-		IT_WEAPON | IT_STAY_COOP,
-		WEAP_SHOTGUN,
-		NULL,
-		0,
-		/* precache */ "weapons/shotgf1b.wav weapons/shotgr1b.wav"
-	},
+	//{
+	//	"USS Enterprise",
+	//	Pickup_Weapon,
+	//	Use_Weapon,
+	//	Drop_Weapon,
+	//	Weapon_Shotgun,
+	//	"misc/w_pkup.wav",
+	//	"models/weapons/g_shotg/tris.md2", EF_ROTATE,
+	//	"models/weapons/v_shotg/tris.md2",
+	//	/* icon */		"w_shotgun",
+	//	/* pickup */	"USS Enterprise",
+	//	0,
+	//	1,
+	//	"Shells",
+	//	IT_WEAPON | IT_STAY_COOP,
+	//	WEAP_SHOTGUN,
+	//	NULL,
+	//	0,
+	//	/* precache */ "weapons/shotgf1b.wav weapons/shotgr1b.wav"
+	//}, 
 
 	{
 		"HMS Hood",
 		Pickup_Weapon,
 		Use_Weapon,
-		Drop_Weapon,
-		Weapon_Shotgun,
+		Drop_Item,
+		BC,
 		"misc/w_pkup.wav",
 		"models/weapons/g_shotg/tris.md2", EF_ROTATE,
 		"models/weapons/v_shotg/tris.md2",
 		/* icon */		"w_shotgun",
 		/* pickup */	"HMS Hood",
 		0,
-		1,
-		"Shells",
+		0,
+		NULL,
 		IT_WEAPON | IT_STAY_COOP,
 		WEAP_SHOTGUN,
 		NULL,
