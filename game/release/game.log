@@ -1,11 +1,19 @@
-﻿Build started 5/15/2019 8:53:21 AM.
+﻿Build started 5/15/2019 10:46:16 AM.
      1>Project "D:\Work\IT266\quake2-full\game\game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Z7 /nologo /W4 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /D _WINDLL /GF /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\release\\" /Fd".\release\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt g_monster.c
-         g_monster.c
-     1>g_monster.c(140): warning C4100: 'kick' : unreferenced formal parameter
-     1>g_monster.c(490): warning C4100: 'other' : unreferenced formal parameter
-     1>g_monster.c(533): warning C4100: 'other' : unreferenced formal parameter
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Z7 /nologo /W4 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /D _WINDLL /GF /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\release\\" /Fd".\release\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt p_weapon.c
+         p_weapon.c
+     1>p_weapon.c(837): warning C4020: 'fire_blaster' : too many actual parameters
+     1>p_weapon.c(889): warning C4020: 'fire_blaster' : too many actual parameters
+     1>p_weapon.c(913): warning C4101: 'torpVec' : unreferenced local variable
+     1>p_weapon.c(1057): warning C4020: 'fire_blaster' : too many actual parameters
+     1>p_weapon.c(1076): warning C4101: 'offset10' : unreferenced local variable
+     1>p_weapon.c(1557): warning C4189: 'HE' : local variable is initialized but not referenced
+     1>p_weapon.c(1558): warning C4189: 'AP' : local variable is initialized but not referenced
+     1>p_weapon.c(1591): warning C4101: 'offsetd' : unreferenced local variable
+     1>p_weapon.c(1679): warning C4189: 'HE' : local variable is initialized but not referenced
+     1>p_weapon.c(1680): warning C4189: 'AP' : local variable is initialized but not referenced
+     1>p_weapon.c(1825): warning C4013: 'fire_bfg2' undefined; assuming extern returning int
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1193,5): warning MSB8012: TargetPath(D:\Work\IT266\quake2-full\game\.\..\release\game.dll) does not match the Linker's OutputFile property value (D:\Work\IT266\quake2-full\release\gamex86.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1195,5): warning MSB8012: TargetName(game) does not match the Linker's OutputFile property value (gamex86). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
        Link:
@@ -63,4 +71,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.43
+Time Elapsed 00:00:00.62

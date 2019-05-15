@@ -25,6 +25,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 static qboolean	is_quad;
 static byte		is_silenced;
+static int HEDestroyerFired = 0;
+static int APDestroyerFired = 0;
+static int HECLFired = 0;
+static int APCAFired = 0;
+static int BCFired = 0;
 
 
 void weapon_grenade_fire (edict_t *ent, qboolean held);
@@ -899,9 +904,14 @@ void HEDestroyer_Fire(edict_t *ent, vec3_t g_offset, int damage, qboolean hyper,
 void HEWeapon_Destroyer_Fire(edict_t *ent)
 {
 	int		damage = 10;
+	HEDestroyerFired = HEDestroyerFired + 1;
 	vec3_t tempvec;
 	vec3_t tempvec2;
 	vec3_t tempvec3;
+	vec3_t	offset, start;
+	vec3_t	forward, right;
+	vec3_t torpVec;
+	vec3_t offset2, offset3, offset4, offset5;
 	HEDestroyer_Fire(ent, vec3_origin, damage, false, EF_BLASTER);
 	VectorSet(tempvec2, 0, 0, 4);
 	VectorAdd(tempvec2, vec3_origin, tempvec2);
@@ -912,6 +922,33 @@ void HEWeapon_Destroyer_Fire(edict_t *ent)
 	VectorSet(tempvec3, 0, 8, 4);
 	VectorAdd(tempvec3, vec3_origin, tempvec3);
 	HEDestroyer_Fire(ent, tempvec3, damage, false, EF_BLASTER);
+	if (HEDestroyerFired == 5)
+	{
+		HEDestroyerFired = 0;
+		AngleVectors(ent->client->v_angle, forward, right, NULL);
+		VectorScale(forward, -2, ent->client->kick_origin);
+		ent->client->kick_angles[0] = -1;
+		VectorSet(offset, 8, 8, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 50, 1200000, 120);
+
+		VectorSet(offset2, 8, 28, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset2, forward, right, start);
+		fire_rocket(ent, offset2, forward, damage, 50, 1200000, 120);
+
+		VectorSet(offset3, 8, 48, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset3, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 50, 1200000, 120);
+
+		VectorSet(offset4, 8, -28, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset4, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 50, 1200000, 120);
+
+		VectorSet(offset5, 8, -48, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset5, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 50, 1200000, 120);
+	
+	}
 	ent->client->ps.gunframe++;
 }
 
@@ -1036,10 +1073,58 @@ void APWeapon_Destroyer_Fire(edict_t *ent)
 {
 	int		damage = 5;
 	vec3_t tempvec;
+	vec3_t offset, offset2, offset3, offset4, offset5, offset6, offset7, offset8, offset9, offset10;
+	vec3_t	start;
+	vec3_t	forward, right;
+	APDestroyerFired = APDestroyerFired + 1;
 	int vecChange = crandom() * 30;
 	VectorSet(tempvec, 0, vecChange, 0);
 	VectorAdd(tempvec, vec3_origin, tempvec);
 	APDestroyer_Fire(ent, tempvec, damage, false, EF_BLASTER);
+	if (APDestroyerFired == 10)
+	{
+		APDestroyerFired = 0;
+		AngleVectors(ent->client->v_angle, forward, right, NULL);
+		VectorScale(forward, -2, ent->client->kick_origin);
+		ent->client->kick_angles[0] = -1;
+		VectorSet(offset, 8, 8, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 100, 1200000, 120);
+
+		VectorSet(offset2, 8, 28, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset2, forward, right, start);
+		fire_rocket(ent, offset2, forward, damage, 100, 1200000, 120);
+
+		VectorSet(offset3, 8, 48, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset3, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 100, 1200000, 120);
+
+		VectorSet(offset4, 8, -28, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset4, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 100, 1200000, 120);
+
+		VectorSet(offset5, 8, -48, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset5, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 100, 1200000, 120);
+
+		VectorSet(offset6, 8, 18, ent->viewheight + 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset6, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 100, 1200000, 120);
+
+		VectorSet(offset7, 8, 38, ent->viewheight + 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset7, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 100, 1200000, 120);
+
+		VectorSet(offset8, 8, -18, ent->viewheight + 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset8, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 100, 1200000, 120);
+
+		VectorSet(offset9, 8, -38, ent->viewheight + 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset9, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 100, 1200000, 120);
+
+
+	}
 
 	ent->client->ps.gunframe++;
 }
@@ -1497,8 +1582,13 @@ void HECL_Fire(edict_t *ent, vec3_t g_offset, int damage)
 void Weapon_HECL_fire(edict_t *ent)
 {
 	int		damage = 30;
+	HECLFired = HECLFired + 1;
 	vec3_t tempvec;
 	vec3_t tempvec2;
+	vec3_t	offset, start;
+	vec3_t	forward, right;
+	vec3_t  offset2, offset3, offset4, offset5;
+	vec3_t offsetd, offsetd2, offsetd3, offsetd4, offsetd5, offsetd6, offsetd7, offsetd8, offsetd9;
 	HECL_Fire(ent, vec3_origin, damage);
 	VectorSet(tempvec2, 0, 20, 0);
 	VectorAdd(tempvec2, vec3_origin, tempvec2);
@@ -1506,6 +1596,69 @@ void Weapon_HECL_fire(edict_t *ent)
 	VectorSet(tempvec, 0, -20, 0);
 	VectorAdd(tempvec, vec3_origin, tempvec);
 	HECL_Fire(ent, tempvec, damage);
+	if (HECLFired == 5)
+	{
+		HECLFired = 0;
+		AngleVectors(ent->client->v_angle, forward, right, NULL);
+		VectorScale(forward, -2, ent->client->kick_origin);
+		ent->client->kick_angles[0] = -1;
+		VectorSet(offset, 8, 8, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 50, 1200000, 120);
+
+		VectorSet(offset2, 8, 28, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset2, forward, right, start);
+		fire_rocket(ent, offset2, forward, damage, 50, 1200000, 120);
+
+		VectorSet(offset3, 8, 48, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset3, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 50, 1200000, 120);
+
+		VectorSet(offset4, 8, -28, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset4, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 50, 1200000, 120);
+
+		VectorSet(offset5, 8, -48, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset5, forward, right, start);
+		fire_rocket(ent, start, forward, damage, 50, 1200000, 120);
+
+		HEDestroyer_Fire(ent, vec3_origin, damage, false, EF_BLASTER);
+
+
+		ent->client->kick_angles[0] = -1;
+
+		VectorSet(offsetd2, 8, 28, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offsetd2, forward, right, start);
+		HEDestroyer_Fire(ent, offsetd2, damage, false, EF_BLASTER);
+
+		VectorSet(offsetd3, 8, 48, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offsetd3, forward, right, start);
+		HEDestroyer_Fire(ent, offsetd3, damage, false, EF_BLASTER);
+
+		VectorSet(offsetd4, 8, -28, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offsetd4, forward, right, start);
+		HEDestroyer_Fire(ent, offsetd4, damage, false, EF_BLASTER);
+
+		VectorSet(offsetd5, 8, -48, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offsetd5, forward, right, start);
+		HEDestroyer_Fire(ent, offsetd5, damage, false, EF_BLASTER);
+
+		VectorSet(offsetd6, 8, 18, ent->viewheight + 8);
+		P_ProjectSource(ent->client, ent->s.origin, offsetd6, forward, right, start);
+		HEDestroyer_Fire(ent, offsetd6, damage, false, EF_BLASTER);
+
+		VectorSet(offsetd7, 8, 38, ent->viewheight + 8);
+		P_ProjectSource(ent->client, ent->s.origin, offsetd7, forward, right, start);
+		HEDestroyer_Fire(ent, offsetd7, damage, false, EF_BLASTER);
+
+		VectorSet(offsetd8, 8, -18, ent->viewheight + 8);
+		P_ProjectSource(ent->client, ent->s.origin, offsetd8, forward, right, start);
+		HEDestroyer_Fire(ent, offsetd8, damage, false, EF_BLASTER);
+
+		VectorSet(offsetd9, 8, -38, ent->viewheight + 8);
+		P_ProjectSource(ent->client, ent->s.origin, offsetd9, forward, right, start);
+		HEDestroyer_Fire(ent, offsetd9, damage, false, EF_BLASTER);
+	}
 	ent->client->ps.gunframe++;
 }
 
